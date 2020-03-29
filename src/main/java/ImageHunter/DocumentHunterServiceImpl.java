@@ -22,6 +22,8 @@ public class DocumentHunterServiceImpl implements IDocumentHunterService{
         return dto;
     }
 
+    private static final int MaxFileNameLength = 200;
+
     @Override
     public IFileInfo GetFile(String url) throws IOException {
 
@@ -30,8 +32,8 @@ public class DocumentHunterServiceImpl implements IDocumentHunterService{
         String fileName = url.substring(url.lastIndexOf('/') + 1);
         fileName = fileName.replaceAll("[^a-zA-Z0-9.-]", "_");
 
-        if(fileName.length() >= 200){
-            fileName = fileName.substring(0,200);
+        if(fileName.length() >= MaxFileNameLength){
+            fileName = fileName.substring(0,MaxFileNameLength);
         }
 
         var bytes = u.openStream().readAllBytes();

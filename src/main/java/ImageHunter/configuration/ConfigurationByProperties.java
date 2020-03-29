@@ -20,10 +20,10 @@ public class ConfigurationByProperties implements IConfiguration {
         threadCount = Integer.parseInt(properties.getProperty("ThreadCount"));
     }
 
-    final String startUrl;
-    final Integer minImageSizeInBytes;
-    final String imageStoreFolder;
-    final Integer threadCount;
+    private final String startUrl;
+    private final Integer minImageSizeInBytes;
+    private final String imageStoreFolder;
+    private final Integer threadCount;
 
     @Override
     public String getStartUrl() {

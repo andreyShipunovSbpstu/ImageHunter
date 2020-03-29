@@ -14,9 +14,9 @@ public class FileInfoImpl implements IFileInfo {
         this.content = content;
     }
 
-    private String name;
-    private long size;
-    private byte[] content;
+    private final String name;
+    private final long size;
+    private final byte[] content;
 
     @Override
     public String getName() { return name; }
