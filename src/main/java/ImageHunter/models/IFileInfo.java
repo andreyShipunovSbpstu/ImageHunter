@@ -1,6 +1,7 @@
 package ImageHunter.models;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 public interface IFileInfo{
     String getName();
@@ -9,5 +10,5 @@ public interface IFileInfo{
 
     byte[] getContent();
 
-    void saveFile(String fullPath) throws IOException;
+    void saveFile(Path fullPath) throws IOException;
 }

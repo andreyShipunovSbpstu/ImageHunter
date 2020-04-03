@@ -1,7 +1,7 @@
 package ImageHunter;
 
 import ImageHunter.models.DocumentInfoDto;
-import ImageHunter.models.FileInfoImpl;
+import ImageHunter.models.FileInfo;
 import ImageHunter.models.IFileInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.stream.Collectors;
 
-public class DocumentHunterServiceImpl implements IDocumentHunterService{
+public class DocumentHunterService implements IDocumentHunterService{
     public DocumentInfoDto GetDocumentInfo(String url) throws IOException {
 
         var dto  = new DocumentInfoDto();
@@ -38,7 +38,7 @@ public class DocumentHunterServiceImpl implements IDocumentHunterService{
 
         var bytes = u.openStream().readAllBytes();
 
-        return new FileInfoImpl(fileName, bytes.length, bytes);
+        return new FileInfo(fileName, bytes.length, bytes);
     }
 }
 

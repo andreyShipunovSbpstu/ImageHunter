@@ -16,8 +16,21 @@ public class Main {
 
         var injector = InitDI();
 
-        var hunter = injector.getInstance(ImageHunterServiceMultiThread.class);
+        var configuration = injector.getInstance(IConfiguration.class);
+        var hunter = injector.getInstance(IImageHunterService.class);
 
+        var executor = StartProgressUpdater(hunter);
+
+        hunter.Do(configuration.getStartUrl(), configuration.getImageStoreFolder(), iFileInfo -> iFileInfo.getSize() > configuration.getMinImageSizeInBytes());
+
+        executor.shutdown();
+    }
+
+    private static Injector InitDI(){
+        return Guice.createInjector(new GuiceModule());
+    }
+
+    private static ScheduledExecutorService StartProgressUpdater(IImageHunterService hunter){
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
         Runnable task = () -> {
@@ -32,13 +45,7 @@ public class Main {
         };
         executor.scheduleWithFixedDelay(task, 3, 3, TimeUnit.SECONDS);
 
-        hunter.Do("https://en.wikipedia.org/", "C:\\Java", iFileInfo -> iFileInfo.getSize() > 1024);
-
-        executor.shutdown();
-    }
-
-    private static Injector InitDI(){
-        return Guice.createInjector(new GuiceModule());
+        return executor;
     }
 }
 

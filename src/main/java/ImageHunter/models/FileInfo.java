@@ -2,12 +2,12 @@ package ImageHunter.models;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-public class FileInfoImpl implements IFileInfo {
+public class FileInfo implements IFileInfo {
 
-    public FileInfoImpl(String name, long size, byte[] content){
+    public FileInfo(String name, long size, byte[] content){
 
         this.name = name;
         this.size = size;
@@ -32,7 +32,7 @@ public class FileInfoImpl implements IFileInfo {
     }
 
     @Override
-    public void saveFile(String fullPath) throws IOException {
-        Files.write(Paths.get(fullPath), getContent(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    public void saveFile(Path fullPath) throws IOException {
+        Files.write(fullPath, getContent(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 }
